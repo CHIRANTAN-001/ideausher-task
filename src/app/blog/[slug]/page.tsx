@@ -1,8 +1,9 @@
+import { getBlogBySlug } from '@/service/blog.service'
 import axios from 'axios'
 import React from 'react'
 
 const getData = async (slug: string) => {
-  const res = await axios.get(`https://blog-api-7s15.onrender.com/api/blogs/${slug}`)
+  const res = await getBlogBySlug({ slug })
   console.log(res.data.blog)
   return res.data.blog
 }

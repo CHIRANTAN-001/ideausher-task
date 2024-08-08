@@ -9,6 +9,7 @@ import BlogCard from '@/components/BlogCard';
 import useDebounce from '@/hooks/useDebounce';
 import tags from '@/components/tagsData.json'
 import Loader from '@/components/Loader';
+import { getBlogDatas } from '@/service/blog.service';
 
 export type BlogPost = {
     _id: string;
@@ -44,13 +45,11 @@ const BlogPage = () => {
     useEffect(() => {
         const getData = async () => {
             try {
-                const res = await axios.get(`https://blog-api-7s15.onrender.com/api/blogs`)
-                // console.log(res.data)
+                const res = await getBlogDatas();
                 setData(res.data)
                 setFilteredData(filterData(res.data, debouncedSearchItem, selectedTag));
                 setLoading(false)
             } catch (error) {
-                // console.log(error)
                 setLoading(false)
             }
         }
