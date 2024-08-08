@@ -10,27 +10,47 @@ import useDebounce from '@/hooks/useDebounce';
 import tags from '@/components/tagsData.json'
 import Loader from '@/components/Loader';
 
+export type BlogPost = {
+    _id: string;
+    title: string;
+    description: string;
+    tags: string[];
+    imageUrl: string;
+    authorName: string;
+    slug: string;
+    createdAt: string;
+    updatedAt: string;
+    __v: number;
+}
 
 const BlogPage = () => {
 
-    const [data, setData] = useState<any[]>([])
+    const [data, setData] = useState<BlogPost[]>([])
     const [loading, setLoading] = useState<boolean>(true);
     const [searchInput, setSearchInput] = useState<string>('')
-    const [filteredData, setFilteredData] = useState<any[]>([]);
+    const [filteredData, setFilteredData] = useState<BlogPost[]>([]);
     const [selectedTag, setSelectedTag] = useState<string>('');
 
     const debouncedSearchItem = useDebounce(searchInput, 300);
+
+    const filterData = (data: BlogPost[], search: string, tag: string) => {
+        return data.filter(item => {
+            const matchesSearch = item.title.toLowerCase().includes(search.toLowerCase());
+            const matchesTag = tag ? item.tags.includes(tag) : true
+            return matchesSearch && matchesTag
+        })
+    }
 
     useEffect(() => {
         const getData = async () => {
             try {
                 const res = await axios.get(`https://blog-api-7s15.onrender.com/api/blogs`)
-                console.log(res.data)
+                // console.log(res.data)
                 setData(res.data)
                 setFilteredData(filterData(res.data, debouncedSearchItem, selectedTag));
                 setLoading(false)
             } catch (error) {
-                console.log(error)
+                // console.log(error)
                 setLoading(false)
             }
         }
@@ -43,13 +63,6 @@ const BlogPage = () => {
         }
     }, [debouncedSearchItem, selectedTag, data]);
 
-    const filterData = (data: any[], search: string, tag: string) => {
-        return data.filter(item => {
-            const matchesSearch = item.title.toLowerCase().includes(search.toLowerCase());
-            const matchesTag = tag ? item.tags.includes(tag) : true
-            return matchesSearch && matchesTag
-        })
-    }
     
     const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setSearchInput(event.target.value);

@@ -5,8 +5,13 @@ import React, { useEffect } from 'react'
 import AOS from 'aos';
 import 'aos/dist/aos.css'
 import { IoIosArrowRoundForward } from "react-icons/io";
+import { BlogPost } from '@/app/blog/page';
 
-const BlogInfo = ({ newsData }) => {
+type BlogInfoProps = {
+    newsData: BlogPost
+}
+
+const BlogInfo: React.FC<BlogInfoProps> = ({ newsData }) => {
 
     useEffect(() => {
         AOS.init({})
