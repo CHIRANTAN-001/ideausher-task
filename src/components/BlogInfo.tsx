@@ -23,7 +23,7 @@ const BlogInfo: React.FC<BlogInfoProps> = ({ newsData }) => {
                 data-aos-duration="600">
                 <div key={newsData._id} className='shadow-[8px_8px_0px_rgba(0,0,0,1)] transition-all duration-300 ease-in-out hover:shadow-none rounded-md'>
                     <div className='overflow-hidden lg:h-64 lg:w-full rounded-t-md cursor-pointer'>
-                        <img loading='lazy' className='object-cover transform transition-transform duration-500 hover:scale-110' src={newsData?.imageUrl} alt='' />
+                        <img loading='eager' className='object-cover transform transition-transform duration-500 hover:scale-110' src={newsData?.imageUrl} alt='' />
                     </div>
                     <div className='lg:h-56 h-72 bg-cyan-200 pt-5 px-5 rounded-b-md'>
                         <div className=''>
