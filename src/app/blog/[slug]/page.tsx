@@ -18,7 +18,7 @@ const page = async ({ params }: { params: any }) => {
             <img src={data.imageUrl} className='lg:w-3/4 lg:h-[30rem]' alt="" />
             <span className='lg:text-4xl text-xl font-bold text-center'>{data.title}</span>
             <div className='flex flex-row flex-wrap lg:gap-x-4 gap-5 pt-4'>
-              {data.tags.map((tag) => (
+              {data.tags.map((tag: string) => (
                 <div className='bg-yellow-200 shadow-[4px_4px_0px_rgba(0,0,0,1)] rounded-full lg:px-5 px-3 lg:py-2 py-1.5'>
                   <span className='lg:text-sm text-xs font-semibold'>{tag}</span>
                 </div>
