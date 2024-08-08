@@ -1,8 +1,9 @@
 import axios from "axios"
+import { BASE_URL } from "./index"
 
 export const getBlogDatas = async () => { 
     try {
-        const res = axios.get(`https://blog-api-7s15.onrender.com/api/blogs`)
+        const res = axios.get(`${BASE_URL}/api/blogs`)
         return res
     } catch (error) {
         throw new Error(String(error))
@@ -11,7 +12,7 @@ export const getBlogDatas = async () => {
 
 export const getBlogBySlug = async ({slug}: {slug:string}) => { 
     try {
-        const res = axios.get(`https://blog-api-7s15.onrender.com/api/blogs/${slug}`)
+        const res = axios.get(`${BASE_URL}/api/blogs/${slug}`)
         return res
     } catch (error) {
         throw new Error(String(error))
