@@ -7,7 +7,7 @@ const getData = async (slug: string) => {
   return res.data.blog
 }
 
-const page = async ({ params }) => {
+const page = async ({ params }: { params: any }) => {
   // console.log(params.slug)
   const data = await getData(params.slug)
   return (
